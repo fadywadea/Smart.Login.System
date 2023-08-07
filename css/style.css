@@ -1,0 +1,59 @@
+body {
+  font-family: "Titillium Web", sans-serif;
+  background: rgb(36, 53, 63);
+}
+
+h1 {
+  color: rgb(23, 162, 184);
+  font-size: 2.5rem;
+}
+
+.bg-color {
+  background: rgb(36, 53, 63);
+  border: 1px solid #ced4da;
+  color: white;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.bg-color:focus {
+  background: rgb(36, 53, 63);
+  border-color: rgb(128, 189, 255);
+  outline: 0px;
+}
+
+.group {
+  box-shadow: rgb(0, 0, 0) -5px 2px 54px -9px;
+}
+
+.btn-tx-color {
+  color: #17a2b8;
+  border: 1px solid #17a2b8;
+}
+
+.btn-tx-color:hover {
+  color: white;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+  color: white;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  text-decoration-line: underline;
+}
