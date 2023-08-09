@@ -79,15 +79,15 @@ function addUser() {
     return false;
   }
 
-  if (validate() == true) {
-    document.getElementById('exist').innerHTML = `<ul class="text-danger m-3">
-    <li>The following characters are allowed in the password:</li>
-    <li>The - lowercase letters (a-z)</li>
-    <li>- uppercase letters (A-Z)</li>
-    <li>- numbers (0-9)</li>
-    <li>- the following special characters: @ $ ! % * ? &</li>
-    </ul>`;
-  }
+  // if (validate() == true) {
+  //   document.getElementById('exist').innerHTML = `<ul class="text-danger m-3">
+  //   <li>The following characters are allowed in the password:</li>
+  //   <li>The - lowercase letters (a-z)</li>
+  //   <li>- uppercase letters (A-Z)</li>
+  //   <li>- numbers (0-9)</li>
+  //   <li>- the following special characters: @ $ ! % * ? &</li>
+  //   </ul>`;
+  // }
 
   let UserValues = {
     name: signupUserName.value,
@@ -131,16 +131,15 @@ function loginUser() {
     document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">All inputs is required</span>`;
     return false;
   }
+
   const password = signinUserPassword.value;
   const email = signinEmail.value;
   for (let i = 0; i < arrUsers.length; i++) {
-    if (arrUsers[i].email.toLowerCase() == signinEmail.value.toLowerCase()) {
-      if (arrUsers[i].password == signinUserPassword.value) {
-        localStorage.setItem('sessionUsername', arrUsers[i].name);
-        window.open("home.html");
-      } else {
-        document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">incorrect email or password</span>`;
-      }
+    if (arrUsers[i].email.toLowerCase() == email.value.toLowerCase() && arrUsers[i].password.toLowerCase() == password.toLowerCase()) {
+      localStorage.setItem('sessionUsername', arrUsers[i].name);
+      window.open("home.html");
+    } else {
+      document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">incorrect email or password</span>`;
     }
   }
 };
