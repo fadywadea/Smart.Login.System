@@ -37,8 +37,9 @@ function emailExist() {
 
 //  validation regex
 
-const nameRegex = /^\w{3,}(\s+\w+)*$/;
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+let nameRegex = /^\w{3,}(\s+\w+)*$/;
+let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+let passwordRegex = /^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
 
 // validation sign up user name
 
@@ -47,6 +48,15 @@ signupUserName.addEventListener("input", () => validate(signupUserName, nameRege
 // validation sign up user email
 
 signupUserEmail.addEventListener("input", () => validate(signupUserEmail, emailRegex));
+
+// validation passwordRe
+
+userPassword.addEventListener("input", () => validate(userPassword, passwordRegex));
+
+// validation sign in email
+
+signinEmail.addEventListener("input", () => validate(signinEmail, emailRegex));
+
 
 // if values valid make the class list is valid and  vice versa is invalid
 
@@ -69,12 +79,22 @@ function addUser() {
     return false;
   }
 
+  if (validate() == true) {
+    document.getElementById('exist').innerHTML = `<ul class="text-danger m-3">
+    <li>The following characters are allowed in the password:</li>
+    <li>The - lowercase letters (a-z)</li>
+    <li>- uppercase letters (A-Z)</li>
+    <li>- numbers (0-9)</li>
+    <li>- the following special characters: @ $ ! % * ? &</li>
+    </ul>`;
+  }
 
-  const UserValues = {
+  let UserValues = {
     name: signupUserName.value,
     email: signupUserEmail.value,
     password: userPassword
   }
+
   if (arrUsers.length == 0) {
     arrUsers.push(UserValues);
     localStorage.setItem('user', JSON.stringify(arrUsers));
@@ -89,6 +109,7 @@ function addUser() {
     localStorage.setItem('user', JSON.stringify(arrUsers));
     document.getElementById('exist').innerHTML = '<span class="text-success m-3">Success</span>'
   }
+
 }
 
 signUp.addEventListener("click", addUser);
@@ -102,23 +123,6 @@ function loginEmpty() {
   }
 };
 
-// validation sign in email
-
-signinEmail.addEventListener("input", () => validate(signinEmail, emailRegex));
-
-
-// if values valid make the class list is valid and  vice versa is invalid  
-
-function validate(element, regex) {
-  const testRegex = regex;
-  if (testRegex.test(element.value)) {
-    element.classList.add("is-valid");
-    element.classList.remove("is-invalid");
-  } else {
-    element.classList.add("is-invalid");
-    element.classList.remove("is-valid");
-  }
-}
 
 // sign in  
 
@@ -127,8 +131,8 @@ function loginUser() {
     document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">All inputs is required</span>`;
     return false;
   }
-  let password = signinUserPassword.value;
-  let email = signinEmail.value;
+  const password = signinUserPassword.value;
+  const email = signinEmail.value;
   for (let i = 0; i < arrUsers.length; i++) {
     if (arrUsers[i].email.toLowerCase() == signinEmail.value.toLowerCase()) {
       if (arrUsers[i].password == signinUserPassword.value) {
