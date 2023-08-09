@@ -1,11 +1,14 @@
-const signupUserName = document.getElementById("signupUserName");
-const signupUserEmail = document.getElementById("signupUserEmail");
-const userPassword = document.getElementById("userPassword");
+// sign up HTML
+let signupUserName = document.getElementById("signupUserName");
+let signupUserEmail = document.getElementById("signupUserEmail");
+let userPassword = document.getElementById("userPassword");
+let signUp = document.getElementById("signUp");
 
-const signinEmail = document.getElementById("signinEmail");
-const signinUserPassword = document.getElementById("signinUserPassword");
+// sign in HTML
+let signinEmail = document.getElementById("signinEmail");
+let signinUserPassword = document.getElementById("signinUserPassword");
+let Login = document.getElementById("Login");
 
-const signUp = document.getElementById("signUp");
 
 let arrUsers = [];
 if (localStorage.getItem('users') == null) {
@@ -25,20 +28,48 @@ function isEmpty() {
 }
 
 function emailExist() {
-  for (var i = 0; i < arrUsers.length; i++) {
+  for (let i = 0; i < arrUsers.length; i++) {
     if (arrUsers[i].email.toLowerCase() == signupUserEmail.value.toLowerCase()) {
       return false
     }
   }
+};
+
+//  validation regex
+
+const nameRegex = /^\w{3,}(\s+\w+)*$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+
+// validation sign up user name
+
+signupUserName.addEventListener("input", () => validate(signupUserName, nameRegex));
+
+// validation sign up user email
+
+signupUserEmail.addEventListener("input", () => validate(signupUserEmail, emailRegex));
+
+// if values valid make the class list is valid and  vice versa is invalid
+
+function validate(element, regex) {
+  const testRegex = regex;
+  if (testRegex.test(element.value)) {
+    element.classList.add("is-valid");
+    element.classList.remove("is-invalid");
+  } else {
+    element.classList.add("is-invalid");
+    element.classList.remove("is-valid");
+  }
 }
 
-
+// sign up
 
 function addUser() {
   if (isEmpty() == false) {
-    document.getElementById("exist").innerHTML = `<span class="text-danger m-3">All inputs is required</span>`;
+    document.getElementById('exist').innerHTML = `<span class="text-danger m-3">All inputs is required</span>`;
     return false;
   }
+
+
   const UserValues = {
     name: signupUserName.value,
     email: signupUserEmail.value,
@@ -48,6 +79,7 @@ function addUser() {
     arrUsers.push(UserValues);
     localStorage.setItem('user', JSON.stringify(arrUsers));
     document.getElementById("exist").innerHTML = `<span class="text-success m-3">Success</span>`;
+    return true;
   }
   if (emailExist() == false) {
     document.getElementById('exist').innerHTML = '<span class="text-danger m-3">email already exists</span>'
@@ -61,52 +93,51 @@ function addUser() {
 
 signUp.addEventListener("click", addUser);
 
+// Function to check values ​​if they are empty
+function loginEmpty() {
+  if (signinEmail.value == "" || signinUserPassword.value == "") {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+// validation sign in email
+
+signinEmail.addEventListener("input", () => validate(signinEmail, emailRegex));
 
 
+// if values valid make the class list is valid and  vice versa is invalid  
 
+function validate(element, regex) {
+  const testRegex = regex;
+  if (testRegex.test(element.value)) {
+    element.classList.add("is-valid");
+    element.classList.remove("is-invalid");
+  } else {
+    element.classList.add("is-invalid");
+    element.classList.remove("is-valid");
+  }
+}
 
+// sign in  
 
+function loginUser() {
+  if (loginEmpty() == false) {
+    document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">All inputs is required</span>`;
+    return false;
+  }
+  let password = signinUserPassword.value;
+  let email = signinEmail.value;
+  for (let i = 0; i < arrUsers.length; i++) {
+    if (arrUsers[i].email.toLowerCase() == signinEmail.value.toLowerCase()) {
+      if (arrUsers[i].password == signinUserPassword.value) {
+        localStorage.setItem('sessionUsername', arrUsers[i].name);
+      } else {
+        document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">incorrect email or password</span>`;
+      }
+    }
+  }
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-// signUp.addEventListener("click", isEmpty);
-
-// // Function to check if an email already exists
-// function emailExists(email) {
-//   // Get all of the emails from local storage.
-//   const emails = localStorage.getItem("emails");
-//   // If there are no emails in local storage, return false.
-//   if (!emails) {
-//     return false;
-//   }
-//   // Convert the emails from a string to an array.
-//   emails = JSON.parse(emails);
-//   // Check if the email exists in the array.
-//   for (const existingEmail of emails) {
-//     if (existingEmail === email) {
-//       return true;
-//     }
-//   }
-// The email does not exist in local storage.
-//   return false;
-// }
-
-
-// Get the user name, email, and password from the user.
-// const username = prompt("Enter your username");
-// const email = prompt("Enter your email");
-// const password = prompt("Enter your password");
-// // Set the user name, email, and password in local storage.
-// localStorage.setItem("username", username);
-// localStorage.setItem("email", email);
-// localStorage.setItem("password", password);
+Login.addEventListener("click", loginUser);
