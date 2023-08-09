@@ -61,15 +61,16 @@ signinEmail.addEventListener("input", () => validate(signinEmail, emailRegex));
 // if values valid make the class list is valid and  vice versa is invalid
 
 function validate(element, regex) {
-  const testRegex = regex;
-  if (testRegex.test(element.value)) {
+  //const testRegex = regex;
+  console.log(element, regex);
+  if (regex.test(element.value)) {
     element.classList.add("is-valid");
     element.classList.remove("is-invalid");
   } else {
     element.classList.add("is-invalid");
     element.classList.remove("is-valid");
   }
-}
+};
 
 // sign up
 
@@ -79,15 +80,16 @@ function addUser() {
     return false;
   }
 
-  // if (validate() == true) {
-  //   document.getElementById('exist').innerHTML = `<ul class="text-danger m-3">
-  //   <li>The following characters are allowed in the password:</li>
-  //   <li>The - lowercase letters (a-z)</li>
-  //   <li>- uppercase letters (A-Z)</li>
-  //   <li>- numbers (0-9)</li>
-  //   <li>- the following special characters: @ $ ! % * ? &</li>
-  //   </ul>`;
-  // }
+  if (validate() == false) {
+    document.getElementById('exist').innerHTML = `
+      <ul class="text-danger m-3">
+      <li>The following characters are allowed in the password:</li>
+      <li>The - lowercase letters (a-z)</li>
+      <li>- uppercase letters (A-Z)</li>
+      <li>- numbers (0-9)</li>
+      <li>- the following special characters: @ $ ! % * ? &</li>
+      </ul>`;
+  }
 
   let UserValues = {
     name: signupUserName.value,
@@ -134,6 +136,7 @@ function loginUser() {
 
   const password = signinUserPassword.value;
   const email = signinEmail.value;
+
   for (let i = 0; i < arrUsers.length; i++) {
     if (arrUsers[i].email.toLowerCase() == email.value.toLowerCase() && arrUsers[i].password.toLowerCase() == password.toLowerCase()) {
       localStorage.setItem('sessionUsername', arrUsers[i].name);
