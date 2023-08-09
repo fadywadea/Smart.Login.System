@@ -137,6 +137,7 @@ function loginUser() {
     if (arrUsers[i].email.toLowerCase() == signinEmail.value.toLowerCase()) {
       if (arrUsers[i].password == signinUserPassword.value) {
         localStorage.setItem('sessionUsername', arrUsers[i].name);
+        window.open("home.html");
       } else {
         document.getElementById('incorrect').innerHTML = `<span class="text-danger m-3">incorrect email or password</span>`;
       }
