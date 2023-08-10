@@ -9,6 +9,9 @@ let signinEmail = document.getElementById("signinEmail");
 let signinUserPassword = document.getElementById("signinUserPassword");
 let Login = document.getElementById("Login");
 
+// Logout from home page
+let Logout = document.getElementById("Logout"); 
+
 
 let arrUsers = [];
 if (localStorage.getItem('users') == null) {
@@ -148,3 +151,7 @@ function loginUser() {
 };
 
 Login.addEventListener("click", loginUser);
+
+Logout.addEventListener("click", () => {
+  localStorage.removeItem("sessionUsername");
+});

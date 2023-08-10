@@ -85,3 +85,32 @@ input:focus,
 textarea:focus {
   box-shadow: 0 0 0 0 transparent !important;
 }
+
+#home {
+  height: 75vh;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn-style {
+  color: rgba(255,255,255,.5);
+}
+
+.btn-style:hover {
+  color: white;
+}
+
+.navbar-shadow {
+  box-shadow: -5px 2px 54px -9px rgba(0, 0, 0, 1);
+}
+
+.brand-color {
+  color: white;
+}
+
+.brand-color:hover {
+  text-decoration: none;
+  color: white;
+}

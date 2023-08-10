@@ -13,28 +13,34 @@
 </head>
 
 <body id="home">
-  <nav class="navbar navbar-expand-lg navbar-dark group">
+  <nav class="navbar navbar-expand-lg navbar-shadow ">
     <div class="container">
-      <a class="navbar-brand" href="#">SMART LOGIN</a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
+      <a class="navbar-brand brand-color " href="#">SMART LOGIN</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="navbar-collapse collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item ">
-            <a class="nav-link btn btn-outline-warning " href="/" onclick="logout()">Logout</a>
-          </li>
-
-
-        </ul>
-
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav me-auto mb-lg-0">
+        </div>
+        <form class="d-flex" role="search">
+          <button class="btn btn-outline-warning btn-style " id="logout" type="submit">Logout</button>
+        </form>
       </div>
     </div>
   </nav>
+  <!--  -->
+  <input type="email" class="form-control my-3 bg-color d-none" id="signinEmail" placeholder="Enter your email">
+  <input type="password" class="form-control my-3 bg-color d-none" id="signinUserPassword"
+    placeholder="Enter your password">
+    <input type="text" class="form-control my-3 bg-color d-none" id="signupUserName" placeholder="Enter your name">
+    <input type="email" class="form-control my-3 bg-color d-none" id="signupUserEmail" placeholder="Enter your email">
+    <input type="password" class="form-control my-3 bg-color d-none" id="userPassword"
+    placeholder="Enter your password">
+    <button class="btn btn-outline-info w-100 my-3 btn-tx-color d-none" id="signUp">Sign Up</button>
+  <button class="btn btn-outline-info w-100 my-3 btn-tx-color d-none" id="Login">Login</button>
+  <!--  -->
+
   <div class="container my-5 text-center h-100 d-flex align-items-center">
     <div class="group m-auto w-75 p-5">
       <h1 id="username"></h1>
