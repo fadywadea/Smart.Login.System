@@ -42,7 +42,7 @@ function emailExist() {
 
 let nameRegex = /^\w{3,}(\s+\w+)*$/;
 let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-let passwordRegex = /^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
+let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{8,}$/;
 
 // validation sign up user name
 
@@ -61,12 +61,11 @@ userPassword.addEventListener("input", () => validate(userPassword, passwordRege
 signinEmail.addEventListener("input", () => validate(signinEmail, emailRegex));
 
 
-// if values valid make the class list is valid and  vice versa is invalid
+//if values valid make the class list is valid and  vice versa is invalid
 
 function validate(element, regex) {
-  //const testRegex = regex;
-  console.log(element, regex);
-  if (regex.test(element.value)) {
+  const testRegex = regex;
+  if (testRegex.test(element.value)) {
     element.classList.add("is-valid");
     element.classList.remove("is-invalid");
   } else {
@@ -83,7 +82,7 @@ function addUser() {
     return false;
   }
 
-  if (validate() == false) {
+  if (validate(signupUserEmail,emailRegex) == false) {
     document.getElementById('exist').innerHTML = `
       <ul class="text-danger m-3">
       <li>The following characters are allowed in the password:</li>
@@ -114,7 +113,6 @@ function addUser() {
     localStorage.setItem('user', JSON.stringify(arrUsers));
     document.getElementById('exist').innerHTML = '<span class="text-success m-3">Success</span>'
   }
-
 }
 
 signUp.addEventListener("click", addUser);
